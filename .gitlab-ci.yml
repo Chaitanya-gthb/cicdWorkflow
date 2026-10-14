@@ -1,0 +1,19 @@
+stages:
+  - init
+  - plan
+
+init:
+  scripts:
+    -echo "Initializing the project..."
+    -mkdir project
+    -cd project
+    -touch README.md
+    -echo "Demo project initialized successfully." > README.md
+
+plan:
+  scripts:
+    -echo "Planning the project..."
+    -mkdir project
+    -cd project
+    -touch README.md
+    -echo "Demo project planned successfully." > README.md
