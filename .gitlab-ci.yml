@@ -3,7 +3,7 @@ stages:
   - plan
 
 init:
-  scripts:
+  script:
     -echo "Initializing the project..."
     -mkdir project
     -cd project
@@ -11,7 +11,7 @@ init:
     -echo "Demo project initialized successfully." > README.md
 
 plan:
-  scripts:
+  script:
     -echo "Planning the project..."
     -mkdir project
     -cd project
