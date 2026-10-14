@@ -4,16 +4,16 @@ stages:
 
 init:
   script:
-    -echo "Initializing the project..."
-    -mkdir project
-    -cd project
-    -touch README.md
-    -echo "Demo project initialized successfully." > README.md
+    - echo "Initializing the project..."
+    - mkdir -p project
+    - cd project
+    - touch README.md
+    - echo "Demo project initialized successfully." > README.md
 
 plan:
   script:
-    -echo "Planning the project..."
-    -mkdir project
-    -cd project
-    -touch README.md
-    -echo "Demo project planned successfully." > README.md
+    - echo "Planning the project..."
+    - mkdir -p project
+    - cd project
+    - touch README.md
+    - echo "Demo project planned successfully." > README.md
