@@ -47,17 +47,11 @@ jobs:
       - name: Terraform Plan
         run: terraform plan -out=tfplan
 
-      - name: Verify Plan File
-        run: |
-          pwd
-          find . -name "tfplan"
-          ls -la
-
       - name: Upload Terraform Plan
         uses: actions/upload-artifact@v4
         with:
           name: terraform-plan
-          path: tfplan
+          path: Terraform/tfplan
 
   terraform-apply:
     name: Terraform Apply
@@ -87,6 +81,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: terraform-plan
+          path: Terraform
 
       - name: Terraform Init
         run: terraform init
