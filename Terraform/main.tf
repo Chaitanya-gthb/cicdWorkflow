@@ -1,3 +1,13 @@
+data "aws_ami" "linux" {
+  most_recent = true
+  owners      = ["amazon"]
+
+  filter {
+    name   = "name"
+    values = ["amzn2-ami-hvm-*-x86_64-gp2"]
+  }
+}
+
 # VPC
 resource "aws_vpc" "my_vpc" {
   cidr_block = "10.0.0.0/25"
@@ -86,9 +96,8 @@ resource "aws_security_group" "pub-sg" {
 
 # Public EC2 Instance
 resource "aws_instance" "my_ec2_1" {
-  ami                         = "ami-015f3aa67b494b27e"
+  ami                         = data.aws_ami.linux.id
   instance_type               = "t3.micro"
-  key_name                    = "Cmikey"
   subnet_id                   = aws_subnet.pubsub.id
   security_groups             = [aws_security_group.pub-sg.id]
   associate_public_ip_address = true
