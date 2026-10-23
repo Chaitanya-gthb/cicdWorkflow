@@ -50,6 +50,12 @@ jobs:
       - name: Terraform Version
         run: terraform version
 
+      - name: Verify Plan File
+        run: |
+          pwd
+          find . -name "tfplan"
+          ls -la
+
       - name: Display Lock File
         run: cat .terraform.lock.hcl
 
