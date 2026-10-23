@@ -101,25 +101,19 @@ jobs:
           name: terraform-artifacts
           path: Terraform 
 
-      - name: Terraform Version
-        run: terraform version
-
-      - name: Find Lock File
-        run: |
-          find /home/runner/work -name ".terraform.lock.hcl"
-
-      - name: Verify Plan File
+      - name: Check Artifact Structure
         run: |
           pwd
-          find . -name "tfplan"
-          ls -la
+          find . -type f
 
-      - name: Display Lock File
-        run: cat .terraform.lock.hcl
+      - name: Debug
+        working-directory: Terraform
+        run: |
+          ls -la
+          cat .terraform.lock.hcl
       
       - name: Terraform Init
         run: terraform init
 
       - name: Terraform Apply
-        working-directory: Terraform
         run: terraform apply tfplan
