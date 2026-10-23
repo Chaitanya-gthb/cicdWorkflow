@@ -47,11 +47,13 @@ jobs:
       - name: Terraform Plan
         run: terraform plan -out=tfplan
 
-      - name: Upload Terraform Plan
+      - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: terraform-plan
-          path: Terraform/tfplan
+          name: terraform-artifacts
+          path: |
+            Terraform/tfplan
+            Terraform/.terraform.lock.hcl
 
   terraform-apply:
     name: Terraform Apply
@@ -77,17 +79,12 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Download Terraform Plan
+      - name: Download Artifacts
         uses: actions/download-artifact@v4
         with:
-          name: terraform-plan
-          path: Terraform
+          name: terraform-artifacts
+          path: Terraform 
       
-      - name: Debug Downloaded Files
-        run: |
-          pwd
-          find . -name "tfplan"
-
       - name: Terraform Init
         run: terraform init
 
