@@ -47,6 +47,12 @@ jobs:
       - name: Terraform Plan
         run: terraform plan -out=tfplan
 
+      - name: Terraform Version
+        run: terraform version
+
+      - name: Display Lock File
+        run: cat .terraform.lock.hcl
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -84,6 +90,12 @@ jobs:
         with:
           name: terraform-artifacts
           path: Terraform 
+
+      - name: Terraform Version
+        run: terraform version
+
+      - name: Display Lock File
+        run: cat .terraform.lock.hcl
       
       - name: Terraform Init
         run: terraform init
