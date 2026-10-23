@@ -82,9 +82,15 @@ jobs:
         with:
           name: terraform-plan
           path: Terraform
+      
+      - name: Debug Downloaded Files
+        run: |
+          pwd
+          find . -name "tfplan"
 
       - name: Terraform Init
         run: terraform init
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve tfplan
+        working-directory: Terraform
+        run: terraform apply tfplan
