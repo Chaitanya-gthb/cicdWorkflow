@@ -98,6 +98,11 @@ jobs:
       - name: Terraform Version
         run: terraform version
 
+      - name: Debug Downloaded Files
+        run: |
+          pwd
+          find . -name ".terraform.lock.hcl"
+
       - name: Display Lock File
         run: cat .terraform.lock.hcl
       
