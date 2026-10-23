@@ -45,27 +45,7 @@ jobs:
         run: terraform validate
 
       - name: Terraform Plan
-        run: terraform plan -out=tfplan
-
-      - name: Terraform Version
-        run: terraform version
-
-      - name: Verify Plan File
-        run: |
-          pwd
-          find . -name "tfplan"
-          ls -la
-
-      - name: Display Lock File
-        run: cat .terraform.lock.hcl
-
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: terraform-artifacts
-          path: |
-            Terraform/tfplan
-            Terraform/.terraform.lock.hcl
+        run: terraform plan
 
   terraform-apply:
     name: Terraform Apply
@@ -95,25 +75,8 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Download Artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: terraform-artifacts
-          path: Terraform 
-
-      - name: Check Artifact Structure
-        run: |
-          pwd
-          find . -type f
-
-      - name: Debug
-        working-directory: Terraform
-        run: |
-          ls -la
-          cat .terraform.lock.hcl
-      
       - name: Terraform Init
         run: terraform init
 
       - name: Terraform Apply
-        run: terraform apply tfplan
+        run: terraform apply --auto-approve
